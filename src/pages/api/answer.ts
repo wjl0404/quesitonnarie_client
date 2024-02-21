@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { postAnswer } from "@/service/answer";
+import Router from "next/router";
 function genAnswerInfo(reqBody: any) {
   const answerList: any[] = [];
   Object.keys(reqBody).forEach((key) => {
@@ -22,12 +23,15 @@ export default async function handler(
   if (req.method != "POST")
     res.status(200).json({ errno: -1, msg: "method error" });
   const answerList = genAnswerInfo(req.body);
+  console.log(answerList);
+  
   // 把回答提交到服务端
   try {
     const resData = await postAnswer(answerList);
 
     if (resData.errno == 0) {
-      res.redirect("/success");
+      
+      res.send('success!')
     } else {
       res.redirect("/fail");
     }

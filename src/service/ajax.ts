@@ -1,7 +1,9 @@
-const HOST = "http://localhost:3001";
+// const HOST = "http://localhost:3001";
+const HOST = "https://questionnaire-mock-two.vercel.app";
+import axios from "axios";
 export async function get(url: string) {
   const res = await fetch(`${HOST}${url}`);
-  const data = res.json();
+  const data = await res.json();
   return data;
 }
 
@@ -10,6 +12,6 @@ export async function post(url: string, body: any) {
     method: "post",
     body: JSON.stringify(body),
   });
-  const data = res.json();
+  const data =await res.json();
   return data;
 }
